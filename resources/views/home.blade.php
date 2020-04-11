@@ -9,11 +9,9 @@
         @include('_publish-tweet-panel')
 
         <div class="border border-gray-300 rounded-lg">
+            @foreach ($tweets as $tweet)
             @include('_tweet')
-            @include('_tweet')
-            @include('_tweet')
-            @include('_tweet')
-            @include('_tweet')
+            @endforeach
         </div>
     </div>
     <div class="p-4 bg-blue-100 rounded-lg lg:w-1/6">
