@@ -9,13 +9,14 @@
 
         <div class="flex justify-between">
             <a href="{{ route('profile', auth()->user()) }}">
-                <img src="{{ auth()->user()->avatar }}" alt="Your avatar" class="mr-2 rounded-full">
+                <img src="{{ auth()->user()->avatar }}" alt="Your avatar" class="mr-2 rounded-full" width="50px"
+                    height="50px">
             </a>
-            <button type="submit" class="py-1 px-4 text-white bg-blue-500 rounded-full">Tweet-a-roo!</button>
+            <button type="submit" class="px-4 py-1 text-white bg-blue-500 rounded-full shadow">Tweet-a-roo!</button>
         </div>
 
         @error('body')
-        <p class="text-red-500 text-sm mt-4">{{ $message }}</p>
+        <p class="mt-4 text-sm text-red-500">{{ $message }}</p>
         @enderror
     </form>
 </div>

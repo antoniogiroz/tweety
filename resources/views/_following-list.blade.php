@@ -1,12 +1,12 @@
-<div class="bg-gray-200 rounded-lg py-4 px-6">
-    <h3 class="font-bold text-xl mb-4">Following</h3>
+<div class="px-6 py-4 bg-gray-200 rounded-lg">
+    <h3 class="mb-4 text-xl font-bold">Following</h3>
 
     <ul>
         @foreach (auth()->user()->follows as $user)
         <li class="mb-4">
             <div>
                 <a class="flex items-center text-sm" href="{{ route('profile', $user) }}">
-                    <img src="{{ $user->avatar }}" alt="" class="rounded-full mr-2">
+                    <img src="{{ $user->avatar }}" alt="" class="mr-2 rounded-full" width="40px" height="40px">
 
                     {{ $user->name }}
                 </a>
