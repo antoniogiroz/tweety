@@ -8,7 +8,9 @@
         <hr class="my-4">
 
         <div class="flex justify-between">
-            <img src="{{ auth()->user()->avatar }}" alt="Your avatar" class="mr-2 rounded-full">
+            <a href="{{ route('profile', auth()->user()) }}">
+                <img src="{{ auth()->user()->avatar }}" alt="Your avatar" class="mr-2 rounded-full">
+            </a>
             <button type="submit" class="py-1 px-4 text-white bg-blue-500 rounded-full">Tweet-a-roo!</button>
         </div>
 

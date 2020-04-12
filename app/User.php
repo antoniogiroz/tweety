@@ -37,13 +37,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
+
+    public function follow(User $user)
+    {
+        $this->follows()->save($user);
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+    }
+
     public function getAvatarAttribute()
     {
-        return "https://i.pravatar.cc/50?u=" . $this->email;
+        return "https://i.pravatar.cc/40?u=" . $this->email;
     }
 
     public function timeline()
     {
-        return Tweet::where('user_id', $this->id)->latest()->get();
+        $followingIds = $this->follows()->pluck('id');
+
+        return Tweet::whereIn('user_id', $followingIds)
+            ->orWhere('user_id', $this->id)
+            ->latest()
+            ->get();
     }
 }
