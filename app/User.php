@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Followable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'name', 'email', 'password',
     ];
 
     /**
@@ -39,17 +39,7 @@ class User extends Authenticatable
 
     public function tweets()
     {
-        return $this->hasMany(Tweet::class);
-    }
-
-    public function follow(User $user)
-    {
-        $this->follows()->save($user);
-    }
-
-    public function follows()
-    {
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+        return $this->hasMany(Tweet::class)->latest();
     }
 
     public function getAvatarAttribute()
@@ -65,5 +55,11 @@ class User extends Authenticatable
             ->orWhere('user_id', $this->id)
             ->latest()
             ->get();
+    }
+
+    public function profilePath($append = '')
+    {
+        $profilePath = route('profile', $this->username);
+        return $append ? "$profilePath/$append" : $profilePath;
     }
 }
