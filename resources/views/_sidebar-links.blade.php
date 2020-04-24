@@ -10,33 +10,13 @@
         </a>
     </li>
     <li>
-        <a class="block mb-4 text-lg font-bold" href="/">
-            Notifications
-        </a>
-    </li>
-    <li>
-        <a class="block mb-4 text-lg font-bold" href="/">
-            Messages
-        </a>
-    </li>
-    <li>
-        <a class="block mb-4 text-lg font-bold" href="/">
-            Bookmarks
-        </a>
-    </li>
-    <li>
-        <a class="block mb-4 text-lg font-bold" href="/">
-            List
-        </a>
-    </li>
-    <li>
         <a class="block mb-4 text-lg font-bold" href="{{ current_user()->profilePath() }}">
             Profile
         </a>
     </li>
-    <li>
-        <a class="block mb-4 text-lg font-bold" href="/">
-            More
-        </a>
-    </li>
+    <form method="POST" action="/logout">
+        @csrf
+
+        <button class="text-lg font-bold">Logout</button>
+    </form>
 </ul>
