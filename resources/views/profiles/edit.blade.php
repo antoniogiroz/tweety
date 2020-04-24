@@ -1,21 +1,7 @@
 <x-app>
-    <form action="{{ $user->profilePath() }}" method="post">
+    <form action="{{ $user->profilePath() }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('patch')
-
-        <div class="mb-6">
-            <label for="username"
-                class="block mb-2 text-xs font-bold text-gray-700 uppercase">{{ __('Username') }}</label>
-
-            <div class="col-md-6">
-                <input id="username" type="text" class="w-full p-2 border border-gray-400" name="username"
-                    value="{{ old('username', $user->username) }}" required autocomplete="username" autofocus>
-
-                @error('username')
-                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
 
         <div class="mb-6">
             <label for="name" class="block mb-2 text-xs font-bold text-gray-700 uppercase">{{ __('Name') }}</label>
@@ -25,6 +11,33 @@
                     value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
 
                 @error('name')
+                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label for="username"
+                class="block mb-2 text-xs font-bold text-gray-700 uppercase">{{ __('Username') }}</label>
+
+            <div class="col-md-6">
+                <input id="username" type="text" class="w-full p-2 border border-gray-400" name="username"
+                    value="{{ old('username', $user->username) }}" required autocomplete="username">
+
+                @error('username')
+                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label for="avatar" class="block mb-2 text-xs font-bold text-gray-700 uppercase">{{ __('avatar') }}</label>
+
+            <div class="col-md-6">
+                <input id="avatar" type="file" class="w-full p-2 border border-gray-400" name="avatar"
+                    value="{{ old('avatar', $user->avatar) }}">
+
+                @error('avatar')
                 <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                 @enderror
             </div>
