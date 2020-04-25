@@ -56,8 +56,14 @@ class User extends Authenticatable
 
         return Tweet::whereIn('user_id', $followingIds)
             ->orWhere('user_id', $this->id)
-            ->latest()
+            ->withLikes()
+            ->orderByDesc('id')
             ->paginate(50);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 
     public function profilePath($append = '')
